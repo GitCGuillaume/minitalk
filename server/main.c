@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:08:35 by gchopin           #+#    #+#             */
-/*   Updated: 2021/05/28 15:18:21 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/05/28 15:35:44 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	print_value(int val)
 	{
 		ft_putchar_fd(c, 1);
 		i = 0;
-		ft_memset(&c, 0, 1);
+		c = 0;
 	}
 }
 
