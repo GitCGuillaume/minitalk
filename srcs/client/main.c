@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:09:17 by gchopin           #+#    #+#             */
-/*   Updated: 2021/05/28 17:37:44 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/05/28 18:05:13 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(int argc, char **argv)
 		while (argv[2][i])
 		{
 			j = 0;
-			while (j < sizeof(char *))
+			while (j < (int)sizeof(char *))
 			{
 				if (argv[2][i] & 1)
 					kill(ft_atoi(argv[1]), SIGUSR1);
