@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:09:17 by gchopin           #+#    #+#             */
-/*   Updated: 2021/05/28 15:57:33 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/05/28 16:41:13 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int argc, char **argv)
 				kill(ft_atoi(argv[1]), SIGUSR2);
 			j++;
 			argv[2][i] = argv[2][i] >> 1;
-			usleep(30);
+			usleep(10);
 		}
 		i++;
 	}

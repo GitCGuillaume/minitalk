@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:08:35 by gchopin           #+#    #+#             */
-/*   Updated: 2021/05/28 15:35:44 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/05/28 16:37:04 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,23 @@
 */
 void	print_value(int val)
 {
-	static int	i = 0;
 	static unsigned char	c = 0;
-	char	tmp;
+	unsigned char	tmp;
+	static short	i = 0;
 
 	tmp = 0;
 	if (val == SIGUSR1)
 	{
 		tmp = tmp ^ 1;
-		tmp <<= i;
-		c ^= tmp;
+		tmp = tmp << i;
+		c = c ^ tmp;
 		i++;
 	}
 	else if (val == SIGUSR2)
 	{
 		tmp = tmp & 0;
-		tmp <<= i;
-		c ^= tmp;
+		tmp = tmp << i;
+		c = c ^ tmp;
 		i++;
 	}
 	if (i == 8)
@@ -54,9 +54,6 @@ int	main(void)
 	ft_putnbr_fd(pid, 1);
 	signal(SIGUSR1, print_value);
 	signal(SIGUSR2, print_value);
-	while (1)
-	{
-		pause();
-	}
+	while (1);
 	return (0);
 }
