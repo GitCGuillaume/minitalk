@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/27 11:09:17 by gchopin           #+#    #+#             */
-/*   Updated: 2021/05/28 15:29:21 by gchopin          ###   ########.fr       */
+/*   Created: 2021/05/28 15:04:44 by gchopin           #+#    #+#             */
+/*   Updated: 2021/05/28 15:05:34 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "client.h"
+#include "server.h"
 
-int	main(int argc, char **argv)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	int	i;
-	int	j;
+	unsigned char	*update_char;
+	size_t			i;
 
+	update_char = b;
 	i = 0;
-	while (argv[2][i])
+	while (len > i)
 	{
-		j = 0;
-		while (j < sizeof(char *))
-		{
-			if ((argv[2][i] & 1) == 1)
-				kill(ft_atoi(argv[1]), SIGUSR1);
-			else
-				kill(ft_atoi(argv[1]), SIGUSR2);
-			j++;
-			argv[2][i] = argv[2][i] >> 1;
-			usleep(10);
-		}
+		update_char[i] = (unsigned char)c;
 		i++;
 	}
-	return (0);
+	return ((void *)b);
 }

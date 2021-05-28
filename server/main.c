@@ -6,40 +6,43 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:08:35 by gchopin           #+#    #+#             */
-/*   Updated: 2021/05/27 22:57:36 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/05/28 15:18:21 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server.h"
 #include <stdio.h>
-//static	char g_global;
-static char	g_char;
 
+/*
+ ** get 1 or 0 from signal, then just transform char c with
+ ** tmp using exclusive OR /wiki/Bitwise_operation#XOR_2
+*/
 void	print_value(int val)
 {
 	static int	i = 0;
+	static unsigned char	c = 0;
+	char	tmp;
 
-	i++;
+	tmp = 0;
 	if (val == SIGUSR1)
 	{
-//ft_putchar_fd('a', 1);
-		g_char = g_char | 1;
-		g_char = g_char << 1;
+		tmp = tmp ^ 1;
+		tmp <<= i;
+		c ^= tmp;
+		i++;
 	}
 	else if (val == SIGUSR2)
 	{
-//ft_putchar_fd('b', 1);
-		g_char = g_char ^ 0;
-		g_char = g_char << 1;
+		tmp = tmp & 0;
+		tmp <<= i;
+		c ^= tmp;
+		i++;
 	}
-	/*for (int i = 0; i < sizeof(char); i++)
-	{
-		ft_putnbr_fd(g_char & 0x01, 1);
-	}*/
 	if (i == 8)
 	{
-		ft_putchar_fd(g_char, 1);
+		ft_putchar_fd(c, 1);
 		i = 0;
+		ft_memset(&c, 0, 1);
 	}
 }
 
@@ -47,10 +50,8 @@ int	main(void)
 {
 	pid_t	pid;
 
-	g_char = 0;
 	pid = getpid();
 	ft_putnbr_fd(pid, 1);
-	//ft_putchar_fd('\n', 1);
 	signal(SIGUSR1, print_value);
 	signal(SIGUSR2, print_value);
 	while (1)
