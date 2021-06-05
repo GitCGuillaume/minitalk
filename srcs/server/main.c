@@ -13,36 +13,37 @@
 #include "server.h"
 #include <stdio.h>
 
+static unsigned char	g_c = 0;
+static short	g_i = 0;
+
 /*
  ** get 1 or 0 from signal, then just transform char c with
  ** tmp using exclusive OR /wiki/Bitwise_operation#XOR_2
 */
 void	print_value(int val)
 {
-	static unsigned char	c = 0;
 	unsigned char	tmp;
-	static short	i = 0;
 
 	tmp = 0;
 	if (val == SIGUSR1)
 	{
 		tmp = tmp ^ 1;
-		tmp = tmp << i;
-		c = c ^ tmp;
-		i++;
+		tmp = tmp << g_i;
+		g_c = g_c ^ tmp;
+		g_i++;
 	}
 	else if (val == SIGUSR2)
 	{
 		tmp = tmp & 0;
-		tmp = tmp << i;
-		c = c ^ tmp;
-		i++;
+		tmp = tmp << g_i;
+		g_c = g_c ^ tmp;
+		g_i++;
 	}
-	if (i == 8)
+	if (g_i == 8)
 	{
-		ft_putchar_fd(c, 1);
-		i = 0;
-		c = 0;
+		ft_putchar_fd(g_c, 1);
+		g_i = 0;
+		g_c = 0;
 	}
 }
 

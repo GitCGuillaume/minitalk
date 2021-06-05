@@ -2,7 +2,7 @@ SERVER = ./srcs/server
 
 CLIENT = ./srcs/client
 
-SRCS = $(SERVER)/ft_putstr_fd.c $(SERVER)/ft_putnbr_fd.c $(CLIENT)/ft_atoi.c
+SRCS = $(SERVER)/ft_memset.c $(SERVER)/ft_putstr_fd.c $(SERVER)/ft_putnbr_fd.c $(CLIENT)/ft_atoi.c
 
 MAIN_S = $(SERVER)/main.c
 

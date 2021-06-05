@@ -31,8 +31,10 @@ int	main(int argc, char **argv)
 {
 	int	i;
 	int	j;
+	int	pid;
 
 	i = 0;
+	pid = ft_atoi(argv[1]);
 	check_args(argc, argv);
 	if (argv[2])
 	{
@@ -42,12 +44,12 @@ int	main(int argc, char **argv)
 			while (j < (int)sizeof(char *))
 			{
 				if (argv[2][i] & 1)
-					kill(ft_atoi(argv[1]), SIGUSR1);
+					kill(pid, SIGUSR1);
 				else
-					kill(ft_atoi(argv[1]), SIGUSR2);
+					kill(pid, SIGUSR2);
 				j++;
 				argv[2][i] = argv[2][i] >> 1;
-				usleep(20);
+				usleep(10);
 			}
 			i++;
 		}
