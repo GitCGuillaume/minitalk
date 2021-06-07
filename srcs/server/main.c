@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:08:35 by gchopin           #+#    #+#             */
-/*   Updated: 2021/06/07 22:16:45 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/06/07 22:52:00 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ unsigned char	*fake_realloc(unsigned char *str, char c, size_t nb)
 
 void	print_value(int val)
 {
-	static unsigned char	buffer[10];
+	static unsigned char	buffer[2048];
 	static unsigned int	i = 0;
 	static unsigned int	nb = 0;
 	unsigned char	tmp;
@@ -94,7 +94,7 @@ void	print_value(int val)
 	}
 	if (i == 8)
 	{
-		if (buffer[nb] == '\0' || nb >= 10)
+		if (buffer[nb] == '\0' || nb >= 2048)
 		{
 			nb = -1;
 			ft_putstr_fd(buffer, 1);
@@ -115,6 +115,7 @@ int	main(void)
 	{
 		signal(SIGUSR1, print_value);
 		signal(SIGUSR2, print_value);
+		pause();
 	}
 	return (0);
 }

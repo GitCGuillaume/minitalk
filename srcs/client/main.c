@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:09:17 by gchopin           #+#    #+#             */
-/*   Updated: 2021/06/07 21:24:29 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/06/07 22:49:04 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(int argc, char **argv)
 			j = 0;
 			while (j < (int)sizeof(char *))
 			{
-				usleep(20);
+				usleep(5000);
 				if (argv[2][i] & 1)
 					kill(pid, SIGUSR1);
 				else
@@ -59,7 +59,7 @@ int	main(int argc, char **argv)
 			i = 0;
 			while (8 > i)
 			{
-				usleep(15);
+				usleep(5000);
 				kill(pid, SIGUSR2);
 				i++;
 			}
