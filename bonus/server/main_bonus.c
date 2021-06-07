@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:08:35 by gchopin           #+#    #+#             */
-/*   Updated: 2021/06/05 20:28:45 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/06/07 22:16:45 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,65 +19,89 @@
  ** tmp using exclusive OR /wiki/Bitwise_operation#XOR_2
 */
 
-static t_values *g_values;
-
-void	write_value(t_values **values, pid_t pid, int val)
+size_t	ft_strlen(unsigned char *str)
 {
-	while (values && pid != g_values->pid)
-		values = &(*values)->next;
-	ft_putnbr_fd((*values)->pid, 1);
-	ft_putstr_fd("\n", 1);
-	ft_putnbr_fd(pid, 1);
-	ft_putstr_fd("\n", 1);
-	if (val == SIGUSR1)
-	{
-		(*values)->tmp = (*values)->tmp ^ 1;
-		(*values)->tmp = (*values)->tmp << (*values)->g_i;
-		(*values)->g_c = (*values)->g_c ^ (*values)->tmp;
-		(*values)->g_i++;
-	}
-	else if (val == SIGUSR2)
-	{
-		(*values)->tmp = (*values)->tmp & 0;
-		(*values)->tmp = (*values)->tmp << (*values)->g_i;
-		(*values)->g_c = (*values)->g_c ^ (*values)->tmp;
-		(*values)->g_i++;
-	}
-	if ((*values)->g_i == 8)
-	{
-		ft_putchar_fd((*values)->g_c, 1);
-		(*values)->g_i = 0;
-		(*values)->g_c = 0;
-	}
+	size_t	i;
 
+	i = 0;
+	if (str)
+		while (str[i])
+			i++;
+	return (i);
 }
+/*
+unsigned char	*fake_realloc(unsigned char *str, char c, size_t nb)
+{
+	unsigned char	*str_realloc;
+	size_t	i;
+
+	i = 0;
+	str_realloc = NULL;
+	if (ft_strlen(str) > nb)
+	{
+		if (str != NULL)
+			free(str);
+		exit(EXIT_FAILURE);
+	}
+	str_realloc = malloc((sizeof(unsigned char) * nb) + 1);
+	if (str_realloc == NULL)
+	{
+		if (str)
+			free(str);
+		exit(EXIT_FAILURE);
+	}
+	if (str == NULL)
+	{
+		str_realloc[0] = c;
+		str_realloc[1] = '\0';
+	}
+	else
+	{
+		while (str[i])
+		{
+			str_realloc[i] = str[i];
+			i++;
+		}
+		str_realloc[i] = c;
+		str_realloc[i + 1] = '\0';
+		free(str);
+	}
+	return (str_realloc);
+}
+*/
 
 void	print_value(int val)
 {
-	static short	g_i = 0;
-	static unsigned char	g_c = 0;
+	static unsigned char	buffer[10];
+	static unsigned int	i = 0;
+	static unsigned int	nb = 0;
 	unsigned char	tmp;
 
 	tmp = 0;
 	if (val == SIGUSR1)
 	{
 		tmp = tmp ^ 1;
-		tmp = tmp << g_i;
-		g_c = g_c ^ tmp;
-		g_i++;
+		tmp = tmp << i;
+		buffer[nb] = buffer[nb] ^ tmp;
+		i++;
 	}
 	else if (val == SIGUSR2)
 	{
 		tmp = tmp & 0;
-		tmp = tmp << g_i;
-		g_c = g_c ^ tmp;
-		g_i++;
+		tmp = tmp << i;
+		buffer[nb] = buffer[nb] ^ tmp;
+		i++;
 	}
-	if (g_i == 8)
+	if (i == 8)
 	{
-		ft_putchar_fd(g_c, 1);
-		g_i = 0;
-		g_c = 0;
+		if (buffer[nb] == '\0' || nb >= 10)
+		{
+			nb = -1;
+			ft_putstr_fd(buffer, 1);
+			ft_bzero(buffer, ft_strlen(buffer));
+		}
+		nb = nb + 1;
+		i = 0;
 	}
 }
 
@@ -91,7 +115,6 @@ int	main(void)
 	{
 		signal(SIGUSR1, print_value);
 		signal(SIGUSR2, print_value);
-		pause();
 	}
 	return (0);
 }

@@ -115,7 +115,6 @@ int	main(void)
 	{
 		signal(SIGUSR1, print_value);
 		signal(SIGUSR2, print_value);
-		pause();
 	}
 	return (0);
 }

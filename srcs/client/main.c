@@ -43,7 +43,7 @@ int	main(int argc, char **argv)
 			j = 0;
 			while (j < (int)sizeof(char *))
 			{
-				usleep(5000);
+				usleep(20);
 				if (argv[2][i] & 1)
 					kill(pid, SIGUSR1);
 				else
@@ -54,13 +54,12 @@ int	main(int argc, char **argv)
 			i++;
 		}
 		j = 0;
-		
 		if (argv[2][i] == '\0')
 		{
 			i = 0;
 			while (8 > i)
 			{
-				usleep(5000);
+				usleep(15);
 				kill(pid, SIGUSR2);
 				i++;
 			}
