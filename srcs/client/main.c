@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:09:17 by gchopin           #+#    #+#             */
-/*   Updated: 2021/06/05 20:29:00 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/06/07 21:24:29 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int	main(int argc, char **argv)
 	int	pid;
 
 	i = 0;
-	pid = ft_atoi(argv[1]);
 	check_args(argc, argv);
+	pid = ft_atoi(argv[1]);
 	if (argv[2])
 	{
 		while (argv[2][i])
@@ -52,6 +52,18 @@ int	main(int argc, char **argv)
 				argv[2][i] = argv[2][i] >> 1;
 			}
 			i++;
+		}
+		j = 0;
+		
+		if (argv[2][i] == '\0')
+		{
+			i = 0;
+			while (8 > i)
+			{
+				usleep(5000);
+				kill(pid, SIGUSR2);
+				i++;
+			}
 		}
 	}
 	return (0);

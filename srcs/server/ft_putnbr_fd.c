@@ -3,7 +3,7 @@
 void	ft_putnbr_fd(pid_t nbr, int fd)
 {
 	if (nbr == -2147483648)
-		ft_putstr_fd("-2147483648", fd);
+		ft_putstr_fd((unsigned char *)"-2147483648", fd);
 	else if (nbr < 0)
 	{
 		ft_putchar_fd('-', 1);
