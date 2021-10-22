@@ -19,5 +19,6 @@ void	ft_putchar_fd(unsigned char c, int fd);
 void	ft_putstr_fd(unsigned char *str, int fd);
 void	ft_putnbr_fd(pid_t nbr, int fd);
 void	*ft_memset(void *b, int c, size_t len);
+unsigned char	*ft_strjoin(unsigned char const *s1, unsigned char const *s2);
 
 #endif
