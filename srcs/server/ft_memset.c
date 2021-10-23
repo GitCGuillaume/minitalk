@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/28 15:04:54 by gchopin           #+#    #+#             */
-/*   Updated: 2021/06/07 21:26:15 by gchopin          ###   ########.fr       */
+/*   Created: 2020/04/28 15:02:54 by gchopin           #+#    #+#             */
+/*   Updated: 2020/04/30 13:32:03 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server.h"
 
-void	ft_bzero(void *s, size_t n)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	unsigned char	*assign_zero;
+	unsigned char	*update_char;
 	size_t			i;
 
+	update_char = b;
 	i = 0;
-	assign_zero = s;
-	if (n > 0)
+	while (len > i)
 	{
-		while (n > i)
-		{
-			assign_zero[i] = 0;
-			i++;
-		}
+		update_char[i] = (unsigned char)c;
+		i++;
 	}
+	return ((void *)b);
 }

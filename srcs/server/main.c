@@ -33,22 +33,22 @@ void	end_print(unsigned char *buffer, unsigned int *i, int *nb, int *end)
 	static unsigned char	*mem_buffer = NULL;
 	unsigned char	*mem;
 
-	if (*nb >= 1024)
+	if (*nb >= 10)
 	{
 		mem = ft_strjoin(mem_buffer, buffer);
-		ft_bzero(buffer, ft_strlen(buffer));
 		free(mem_buffer);
 		mem_buffer = mem;
+		//ft_memset(buffer, 0, ft_strlen(buffer));
 		*nb = -1;
 	}
 	if (*end == 0)
 	{
-		if (*nb < 1024)
+		if (*nb >= 0 && *nb < 10)
 		{
 			mem = ft_strjoin(mem_buffer, buffer);
 			free(mem_buffer);
 			mem_buffer = mem;
-			ft_bzero(buffer, ft_strlen(buffer));
+		//	ft_memset(buffer, 0,  ft_strlen(buffer));
 		}
 		write(1, mem_buffer, ft_strlen(mem_buffer));
 		free(mem_buffer);
@@ -59,10 +59,10 @@ void	end_print(unsigned char *buffer, unsigned int *i, int *nb, int *end)
 	*nb = *nb + 1;
 	*i = 0;
 }
-
+#include <stdio.h>
 void	print_value(int val, siginfo_t *info, void *ucontext)
 {
-	static unsigned char	buffer[1024];
+	static unsigned char	buffer[10];
 	static unsigned int	i = 0;
 	static int		nb = 0;
 	static int		end = 0;
@@ -83,10 +83,12 @@ void	print_value(int val, siginfo_t *info, void *ucontext)
 		buffer[nb] = buffer[nb] ^ tmp;
 		i++;
 	}
-	write(1, &i + '0', 1);
 	if (i == 8)
 		end_print(buffer, &i, &nb, &end);
-	usleep(500);
+	//printf("nb=%d\n i=%d\n", nb, i);
+	if (nb == 0 && i == 0)
+		ft_memset(buffer, 0,  ft_strlen(buffer));
+	usleep(300);
 	kill(info->si_pid, SIGUSR1);
 }
 

@@ -14,7 +14,6 @@ typedef struct s_values
 	struct s_values *next;
 } t_values;
 
-void	ft_bzero(void *s, size_t n);
 void	ft_putchar_fd(unsigned char c, int fd);
 void	ft_putstr_fd(unsigned char *str, int fd);
 void	ft_putnbr_fd(pid_t nbr, int fd);

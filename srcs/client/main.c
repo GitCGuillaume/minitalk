@@ -31,7 +31,7 @@ void	program_wait(int val)
 {
 	if (val == SIGUSR1)
 		write(1, "OK\n", 3);
-	
+	usleep(300);
 }
 
 int	main(int argc, char **argv)
