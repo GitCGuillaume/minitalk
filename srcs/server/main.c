@@ -28,41 +28,45 @@ size_t	ft_strlen(unsigned char *str)
 	return (i);
 }
 
-void	end_print(unsigned char *buffer, unsigned int *i, int *nb, int *end)
+unsigned char	*end_print(unsigned char *buffer, int *nb, int *end)
 {
 	static unsigned char	*mem_buffer = NULL;
 	unsigned char	*mem;
 
-	if (*nb >= 10)
+	if (*nb == 4095)
 	{
 		mem = ft_strjoin(mem_buffer, buffer);
 		free(mem_buffer);
+		if (mem == NULL)
+			return (NULL);
 		mem_buffer = mem;
-		//ft_memset(buffer, 0, ft_strlen(buffer));
+		ft_memset(buffer, 0, ft_strlen(buffer));
 		*nb = -1;
 	}
 	if (*end == 0)
 	{
-		if (*nb >= 0 && *nb < 10)
+		if (*nb >= 0 && *nb < 4095)
 		{
 			mem = ft_strjoin(mem_buffer, buffer);
 			free(mem_buffer);
+			if (mem == NULL)
+				return (NULL);
 			mem_buffer = mem;
-		//	ft_memset(buffer, 0,  ft_strlen(buffer));
+			ft_memset(buffer, 0,  ft_strlen(buffer));
+			*nb = -1;
 		}
 		write(1, mem_buffer, ft_strlen(mem_buffer));
 		free(mem_buffer);
 		mem_buffer = NULL;
-		*nb = -1;
 	}
 	*end = 0;
 	*nb = *nb + 1;
-	*i = 0;
+	return (NULL);
 }
-#include <stdio.h>
+
 void	print_value(int val, siginfo_t *info, void *ucontext)
 {
-	static unsigned char	buffer[10];
+	static unsigned char	buffer[4096];
 	static unsigned int	i = 0;
 	static int		nb = 0;
 	static int		end = 0;
@@ -83,13 +87,13 @@ void	print_value(int val, siginfo_t *info, void *ucontext)
 		buffer[nb] = buffer[nb] ^ tmp;
 		i++;
 	}
-	if (i == 8)
-		end_print(buffer, &i, &nb, &end);
-	//printf("nb=%d\n i=%d\n", nb, i);
-	if (nb == 0 && i == 0)
-		ft_memset(buffer, 0,  ft_strlen(buffer));
-	usleep(300);
-	kill(info->si_pid, SIGUSR1);
+	if (i >= sizeof(char *))
+	{
+		end_print(buffer, &nb, &end);
+		i = 0;
+	}
+	usleep(200);
+	kill(info->si_pid, SIGUSR2);
 }
 
 int	main(void)
@@ -101,22 +105,21 @@ int	main(void)
 
 	pid = getpid();
 	s_sig_one.sa_sigaction = print_value;
-	s_sig_one.sa_flags = SA_SIGINFO;
 	sigemptyset(&s_sig_one.sa_mask);
+	s_sig_one.sa_flags = SA_SIGINFO;
 	s_sig_two.sa_sigaction = print_value;
-	s_sig_two.sa_flags = SA_SIGINFO;
 	sigemptyset(&s_sig_two.sa_mask);
+	s_sig_two.sa_flags = SA_SIGINFO;
 	ft_putnbr_fd(pid, 1);
 	write(1, "\n", 1);
+	result = sigaction(SIGUSR1, &s_sig_one, NULL);
+	if (result < 0)
+		exit(EXIT_FAILURE);
+	result = sigaction(SIGUSR2, &s_sig_two, NULL);
+	if (result < 0)
+		result = sigaction(SIGUSR2, & s_sig_two, NULL);
 	while (1)
-	{
-		result = sigaction(SIGUSR1, &s_sig_one, NULL);
-		if (result < 0)
-			exit(EXIT_FAILURE);
-		result = sigaction(SIGUSR2, &s_sig_two, NULL);
-		if (result < 0)
-			result = sigaction(SIGUSR2, & s_sig_two, NULL);
 		pause();
-	}
+	result = 0;
 	return (0);
 }

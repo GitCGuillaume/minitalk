@@ -29,9 +29,8 @@ void	check_args(int argc, char **argv)
 
 void	program_wait(int val)
 {
-	if (val == SIGUSR1)
+	if (val == SIGUSR2)
 		write(1, "OK\n", 3);
-	usleep(300);
 }
 
 int	main(int argc, char **argv)
@@ -43,13 +42,16 @@ int	main(int argc, char **argv)
 	int	result;
 
 	s_sig.sa_handler = program_wait;
-	s_sig.sa_flags = SA_SIGINFO;
+	s_sig.sa_flags = SA_SIGINFO; //| SA_NODEFER;
 	sigemptyset(&s_sig.sa_mask);
 	i = 0;
 	check_args(argc, argv);
 	pid = ft_atoi(argv[1]);
 	if (argv[2])
 	{
+		result = sigaction(SIGUSR2, &s_sig, NULL);
+		if (result < 0)
+			exit(EXIT_FAILURE);
 		while (argv[2][i])
 		{
 			j = 0;
@@ -59,22 +61,16 @@ int	main(int argc, char **argv)
 					kill(pid, SIGUSR1);
 				else
 					kill(pid, SIGUSR2);
+				pause();
 				j++;
 				argv[2][i] = argv[2][i] >> 1;
-				result = sigaction(SIGUSR1, &s_sig, NULL);
-				if (result < 0)
-					exit(EXIT_FAILURE);
-				pause();
 			}
 			i++;
 		}
 		i = 0;
-		while (8 > i)
+		while ((int)sizeof(char *) > i)
 		{
 			kill(pid, SIGUSR2);
-			result = sigaction(SIGUSR1, &s_sig, NULL);
-			if (result < 0)
-				exit(EXIT_FAILURE);
 			pause();
 			i++;
 		}
