@@ -6,22 +6,11 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 12:55:08 by gchopin           #+#    #+#             */
-/*   Updated: 2021/10/25 15:57:14 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/10/25 20:14:11 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server_bonus.h"
-
-static size_t	ft_len(unsigned char *str)
-{
-	size_t	i;
-
-	i = 0;
-	if (str)
-		while (str[i] != '\0')
-			i++;
-	return (i);
-}
 
 static int	write_buffer(unsigned char const *str, unsigned char *ptr, int i)
 {
@@ -36,7 +25,8 @@ static int	write_buffer(unsigned char const *str, unsigned char *ptr, int i)
 	return (i);
 }
 
-unsigned char	*ft_strjoin(unsigned char const *s1, unsigned char const *s2)
+unsigned char	*ft_strjoin(unsigned char const *s1,
+		unsigned char const *s2, size_t total)
 {
 	unsigned char			*ptr;
 	unsigned int			i;
@@ -46,12 +36,10 @@ unsigned char	*ft_strjoin(unsigned char const *s1, unsigned char const *s2)
 	j = 0;
 	if (!s2)
 		return (NULL);
-	ptr = malloc((sizeof(unsigned char const *) * ft_len((unsigned char *)s1))
-			+ (sizeof(unsigned char const *)
-				* ft_len((unsigned char *)s2)) + 1);
+	ptr = malloc(total + 1);
 	if (ptr == NULL)
 		return (NULL);
-	write_buffer(s1, ptr, i);
+	i = write_buffer(s1, ptr, i);
 	if (s2)
 	{
 		while (s2[j] != '\0')

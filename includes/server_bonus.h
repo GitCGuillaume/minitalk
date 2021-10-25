@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 15:30:48 by gchopin           #+#    #+#             */
-/*   Updated: 2021/10/25 15:52:47 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/10/25 20:16:16 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 # include <signal.h>
 # include <stdlib.h>
 
-unsigned char	*ft_strjoin(unsigned char const *s1, unsigned char const *s2);
+unsigned char	*ft_strjoin(unsigned char const *s1,
+					unsigned char const *s2, size_t total);
 void			ft_putchar_fd(unsigned char c, int fd);
 void			ft_putstr_fd(unsigned char *str, int fd);
 void			ft_putnbr_fd(pid_t nbr, int fd);

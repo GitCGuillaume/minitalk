@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:08:35 by gchopin           #+#    #+#             */
-/*   Updated: 2021/10/25 15:57:31 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/10/25 20:13:16 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 unsigned char	*g_mem_buffer;
 
-void	alloc_print(unsigned char *buffer, int *nb)
+void	alloc_print(unsigned char *buffer, unsigned int total, int *nb)
 {
 	unsigned char	*mem;
 
-	mem = ft_strjoin(g_mem_buffer, buffer);
+	mem = ft_strjoin(g_mem_buffer, buffer, total);
 	free(g_mem_buffer);
 	if (mem == NULL)
 		exit(EXIT_FAILURE);
@@ -29,19 +29,23 @@ void	alloc_print(unsigned char *buffer, int *nb)
 
 void	end_print(unsigned char *buffer, int *nb, int end)
 {
+	static unsigned int		total = 0;
+
+	total++;
 	if (*nb == 4095)
 	{
-		alloc_print(buffer, nb);
+		alloc_print(buffer, total, nb);
 	}
 	if (end == 0)
 	{
 		if (*nb >= 0 && *nb < 4095)
 		{
-			alloc_print(buffer, nb);
+			alloc_print(buffer, total, nb);
 		}
 		write(1, g_mem_buffer, ft_strlen(g_mem_buffer));
 		free(g_mem_buffer);
 		g_mem_buffer = NULL;
+		total = 0;
 	}
 }
 
@@ -63,7 +67,7 @@ void	print_value(int val, siginfo_t *info, void *ucontext)
 		end = 0;
 		nb++;
 	}
-	usleep(200);
+	usleep(300);
 	if (kill(info->si_pid, SIGUSR2) < 0)
 		if (g_mem_buffer != NULL)
 			free(g_mem_buffer);

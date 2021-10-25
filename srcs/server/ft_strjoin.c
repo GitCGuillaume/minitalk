@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 12:55:08 by gchopin           #+#    #+#             */
-/*   Updated: 2021/10/25 17:58:51 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/10/25 20:07:55 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ static int	write_buffer(unsigned char const *str, unsigned char *ptr, int i)
 	return (i);
 }
 
-unsigned char	*ft_strjoin(unsigned char const *s1, unsigned char const *s2, size_t total)
+unsigned char	*ft_strjoin(unsigned char const *s1,
+		unsigned char const *s2, size_t total)
 {
 	unsigned char			*ptr;
 	unsigned int			i;
