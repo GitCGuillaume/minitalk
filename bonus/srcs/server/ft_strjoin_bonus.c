@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 12:55:08 by gchopin           #+#    #+#             */
-/*   Updated: 2021/10/25 20:14:11 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/10/25 22:05:44 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ unsigned char	*ft_strjoin(unsigned char const *s1,
 	j = 0;
 	if (!s2)
 		return (NULL);
-	ptr = malloc(total + 1);
+	ptr = malloc(sizeof(unsigned char *) * (total + 1));
 	if (ptr == NULL)
 		return (NULL);
 	i = write_buffer(s1, ptr, i);
