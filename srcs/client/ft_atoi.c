@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 15:33:14 by gchopin           #+#    #+#             */
-/*   Updated: 2021/05/27 15:38:32 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/10/25 11:13:12 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	is_other(char c)
 
 pid_t	ft_atoi(const char *str)
 {
-	int	i;
+	int		i;
 	pid_t	result;
 	pid_t	symbol;
 
