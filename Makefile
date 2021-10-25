@@ -45,6 +45,8 @@ CLANG = clang -Wall -Wextra -Werror
 .c.o:
 	$(CLANG) -Iincludes -c $< -o $(<:.c=.o)
 
+all:	$(NAME_SERVER) $(NAME_CLIENT)
+
 $(NAME_SERVER): $(OBJS) $(OBJS_S)
 	$(CLANG) -Iincludes -o $(NAME_SERVER) $(OBJS) $(OBJS_S)
 
@@ -56,8 +58,6 @@ $(NAME_SERVER_B): $(OBJS_B) $(OBJS_SB)
 
 $(NAME_CLIENT_B): $(OBJS_B) $(OBJS_CB)
 	$(CLANG) -Iincludes -o $(NAME_CLIENT_B) $(OBJS_B) $(OBJS_CB)
-
-all:	$(NAME_SERVER) $(NAME_CLIENT)
 
 clean:
 	$(RM) $(OBJS)
