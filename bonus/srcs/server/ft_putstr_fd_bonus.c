@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.h                                           :+:      :+:    :+:   */
+/*   ft_putstr_fd_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/25 15:30:53 by gchopin           #+#    #+#             */
-/*   Updated: 2021/10/25 15:38:52 by gchopin          ###   ########.fr       */
+/*   Created: 2021/05/27 15:53:40 by gchopin           #+#    #+#             */
+/*   Updated: 2021/10/25 15:56:46 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLIENT_H
-# define CLIENT_H
+#include "server_bonus.h"
 
-# include <unistd.h>
-# include <signal.h>
-# include <stdlib.h>
+void	ft_putchar_fd(unsigned char c, int fd)
+{
+	write(fd, &c, 1);
+}
 
-pid_t	ft_atoi(const char *str);
-void	ft_putstr_fd(char *str, int fd);
+void	ft_putstr_fd(unsigned char *str, int fd)
+{
+	int	i;
 
-#endif
+	i = 0;
+	if (str == NULL)
+		return ;
+	while (str[i])
+	{
+		ft_putchar_fd(str[i], fd);
+		i++;
+	}
+}

@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 15:53:40 by gchopin           #+#    #+#             */
-/*   Updated: 2021/06/07 21:26:08 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/10/25 15:29:58 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_putchar_fd(unsigned char c, int fd)
 
 void	ft_putstr_fd(unsigned char *str, int fd)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (str == NULL)
@@ -30,4 +30,3 @@ void	ft_putstr_fd(unsigned char *str, int fd)
 		i++;
 	}
 }
-

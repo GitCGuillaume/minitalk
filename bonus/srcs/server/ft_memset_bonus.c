@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.h                                           :+:      :+:    :+:   */
+/*   ft_memset_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/25 15:30:53 by gchopin           #+#    #+#             */
-/*   Updated: 2021/10/25 15:38:52 by gchopin          ###   ########.fr       */
+/*   Created: 2020/04/28 15:02:54 by gchopin           #+#    #+#             */
+/*   Updated: 2021/10/25 15:56:36 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLIENT_H
-# define CLIENT_H
+#include "server_bonus.h"
 
-# include <unistd.h>
-# include <signal.h>
-# include <stdlib.h>
+void	*ft_memset(void *b, int c, size_t len)
+{
+	unsigned char	*update_char;
+	size_t			i;
 
-pid_t	ft_atoi(const char *str);
-void	ft_putstr_fd(char *str, int fd);
-
-#endif
+	update_char = b;
+	i = 0;
+	while (len > i)
+	{
+		update_char[i] = (unsigned char)c;
+		i++;
+	}
+	return ((void *)b);
+}
