@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 12:55:08 by gchopin           #+#    #+#             */
-/*   Updated: 2021/10/25 15:18:14 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/10/25 17:58:51 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ unsigned char	*ft_strjoin(unsigned char const *s1, unsigned char const *s2)
 				* ft_len((unsigned char *)s2)) + 1);
 	if (ptr == NULL)
 		return (NULL);
-	write_buffer(s1, ptr, i);
+	i = write_buffer(s1, ptr, i);
 	if (s2)
 	{
 		while (s2[j] != '\0')

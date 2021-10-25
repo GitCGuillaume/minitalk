@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:08:35 by gchopin           #+#    #+#             */
-/*   Updated: 2021/10/25 15:08:34 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/10/25 17:57:18 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	print_value(int val, siginfo_t *info, void *ucontext)
 		end = 0;
 		nb++;
 	}
-	usleep(200);
+	usleep(300);
 	if (kill(info->si_pid, SIGUSR2) < 0)
 		if (g_mem_buffer != NULL)
 			free(g_mem_buffer);
