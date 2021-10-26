@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:09:17 by gchopin           #+#    #+#             */
-/*   Updated: 2021/10/25 15:59:33 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/10/26 16:10:18 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ void	check_args(int argc, char **argv)
 void	program_wait(int val)
 {
 	if (val == SIGUSR2)
-		write(1, "OK\n", 3);
+	{
+	//	write(1, "OK\n", 3);
+		usleep(10);
+	}
 }
 
 void	loop_message(char **argv, int pid)
@@ -85,6 +88,8 @@ int	main(int argc, char **argv)
 	s_sig.sa_handler = program_wait;
 	s_sig.sa_flags = SA_SIGINFO;
 	if (sigemptyset(&s_sig.sa_mask) < 0)
+		exit(EXIT_FAILURE);
+	if (sigaddset(&s_sig.sa_mask, SIGUSR2) < 0)
 		exit(EXIT_FAILURE);
 	i = 0;
 	check_args(argc, argv);

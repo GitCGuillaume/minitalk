@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:08:35 by gchopin           #+#    #+#             */
-/*   Updated: 2021/10/26 14:53:59 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/10/26 16:05:26 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	alloc_print(unsigned char *buffer, unsigned int total, int *nb)
 	*nb = -1;
 }
 
-#include <stdio.h>
 void	end_print(unsigned char *buffer, int *nb, int end)
 {
 	static unsigned int		total = 0;
@@ -60,7 +59,7 @@ void	print_value(int val, siginfo_t *info, void *ucontext)
 	static int				end = 0;
 
 	(void)ucontext;
-	usleep(80);
+	usleep(40);
 	i = buffer_operator(val, nb, i, buffer);
 	if (val == SIGUSR1)
 		end = 1;
@@ -70,7 +69,7 @@ void	print_value(int val, siginfo_t *info, void *ucontext)
 		end = 0;
 		nb++;
 	}
-	usleep(40);
+	usleep(80);
 	if (kill(info->si_pid, SIGUSR2) < 0)
 	{
 		if (g_mem_buffer != NULL)
