@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 14:59:01 by gchopin           #+#    #+#             */
-/*   Updated: 2021/10/25 15:56:55 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/10/26 20:16:26 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ size_t	ft_strlen(unsigned char *str)
  ** get 1 or 0 from signal, then just transform char c with
  ** tmp using exclusive OR
 */
+
 int	buffer_operator(int val, int nb, unsigned int i, unsigned char *buffer)
 {
 	unsigned char	tmp;
@@ -34,13 +35,13 @@ int	buffer_operator(int val, int nb, unsigned int i, unsigned char *buffer)
 	tmp = 0;
 	if (val == SIGUSR1)
 	{
-		tmp = (tmp ^ 1) << i;
+		tmp = (tmp ^ 1) << (i & 7);
 		buffer[nb] = buffer[nb] ^ tmp;
 		i++;
 	}
 	else if (val == SIGUSR2)
 	{
-		tmp = (tmp & 0) << i;
+		tmp = (tmp & 0) << (i & 7);
 		buffer[nb] = buffer[nb] ^ tmp;
 		i++;
 	}

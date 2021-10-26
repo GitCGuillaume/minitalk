@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:08:35 by gchopin           #+#    #+#             */
-/*   Updated: 2021/10/26 16:05:26 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/10/26 20:12:01 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,16 @@ void	end_print(unsigned char *buffer, int *nb, int end)
 	total++;
 	if (*nb == 4095)
 	{
-		//total += 4096;
 		alloc_print(buffer, total, nb);
 	}
 	if (end == 0)
 	{
 		if (*nb >= 0 && *nb < 4095)
 		{
-			//total += *nb;
 			alloc_print(buffer, total, nb);
 		}
-		write(1, g_mem_buffer, total);//ft_strlen(g_mem_buffer));
+		write(1, g_mem_buffer, total);
+		write(1, "\n", 1);
 		free(g_mem_buffer);
 		g_mem_buffer = NULL;
 		total = 0;
@@ -104,20 +103,18 @@ int	main(void)
 		exit(0);
 	if (sigaddset(&s_sig_one.sa_mask, SIGUSR1) < 0)
 		exit(0);
-	s_sig_one.sa_flags = SA_SIGINFO | SA_NODEFER;
+	s_sig_one.sa_flags = SA_SIGINFO;
 	s_sig_two.sa_sigaction = print_value;
 	if (sigemptyset(&s_sig_two.sa_mask) < 0)
 		exit(0);
 	if (sigaddset(&s_sig_two.sa_mask, SIGUSR2) < 0)
 		exit(0);
-	s_sig_two.sa_flags = SA_SIGINFO | SA_NODEFER;
+	s_sig_two.sa_flags = SA_SIGINFO;
 	ft_putnbr_fd(pid, 1);
 	write(1, "\n", 1);
 	run_sigaction(&s_sig_one, SIGUSR1);
 	run_sigaction(&s_sig_two, SIGUSR2);
 	while (1)
-	{
 		pause();
-	}
 	return (0);
 }
