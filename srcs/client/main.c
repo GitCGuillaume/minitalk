@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:09:17 by gchopin           #+#    #+#             */
-/*   Updated: 2021/10/25 17:38:43 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/10/26 11:21:39 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,14 @@ int	main(int argc, char **argv)
 
 	s_sig.sa_handler = program_wait;
 	s_sig.sa_flags = SA_SIGINFO;
-	if (sigemptyset(&s_sig.sa_mask) < 0)
+	//if (sigemptyset(&s_sig.sa_mask) < 0)
+	if (sigaddset(&s_sig.sa_mask, SIGUSR2) < 0)
 		exit(EXIT_FAILURE);
 	i = 0;
 	check_args(argc, argv);
 	pid = ft_atoi(argv[1]);
+	//if (argv[2][0] == '\0')
+	//	loop_end(pid);
 	if (argv[2])
 	{
 		result = sigaction(SIGUSR2, &s_sig, NULL);
