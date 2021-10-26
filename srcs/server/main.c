@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:08:35 by gchopin           #+#    #+#             */
-/*   Updated: 2021/10/26 13:06:49 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/10/26 14:53:59 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,17 @@ void	end_print(unsigned char *buffer, int *nb, int end)
 {
 	static unsigned int		total = 0;
 
-	//total++;
+	total++;
 	if (*nb == 4095)
 	{
-		total += 4096;
+		//total += 4096;
 		alloc_print(buffer, total, nb);
 	}
 	if (end == 0)
 	{
 		if (*nb >= 0 && *nb < 4095)
 		{
-			total += *nb;
+			//total += *nb;
 			alloc_print(buffer, total, nb);
 		}
 		write(1, g_mem_buffer, total);//ft_strlen(g_mem_buffer));
@@ -60,16 +60,17 @@ void	print_value(int val, siginfo_t *info, void *ucontext)
 	static int				end = 0;
 
 	(void)ucontext;
+	usleep(80);
 	i = buffer_operator(val, nb, i, buffer);
 	if (val == SIGUSR1)
 		end = 1;
-	if (i >= sizeof(char *))
+	if ((i & 7) == 0)
 	{
 		end_print(buffer, &nb, end);
-		i = 0;
 		end = 0;
 		nb++;
 	}
+	usleep(40);
 	if (kill(info->si_pid, SIGUSR2) < 0)
 	{
 		if (g_mem_buffer != NULL)
@@ -118,7 +119,6 @@ int	main(void)
 	while (1)
 	{
 		pause();
-		usleep(500);
 	}
 	return (0);
 }

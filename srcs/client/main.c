@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:09:17 by gchopin           #+#    #+#             */
-/*   Updated: 2021/10/26 11:21:39 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/10/26 15:00:00 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ void	check_args(int argc, char **argv)
 
 void	program_wait(int val)
 {
+	//if (val == SIGUSR2)
+	//	write(1, "OK\n", 3);
 	if (val == SIGUSR2)
-		write(1, "OK\n", 3);
+		usleep(40);
 }
 
 void	loop_message(char **argv, int pid)
