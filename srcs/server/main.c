@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:08:35 by gchopin           #+#    #+#             */
-/*   Updated: 2021/10/26 11:44:38 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/10/26 13:06:49 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	end_print(unsigned char *buffer, int *nb, int end)
 {
 	static unsigned int		total = 0;
 
+	//total++;
 	if (*nb == 4095)
 	{
 		total += 4096;
@@ -47,7 +48,6 @@ void	end_print(unsigned char *buffer, int *nb, int end)
 		write(1, g_mem_buffer, total);//ft_strlen(g_mem_buffer));
 		free(g_mem_buffer);
 		g_mem_buffer = NULL;
-		printf("buffer=%s\n", buffer);
 		total = 0;
 	}
 }
@@ -100,15 +100,17 @@ int	main(void)
 	g_mem_buffer = NULL;
 	pid = getpid();
 	s_sig_one.sa_sigaction = print_value;
-	//if (sigemptyset(&s_sig_one.sa_mask) < 0)
+	if (sigemptyset(&s_sig_one.sa_mask) < 0)
+		exit(0);
 	if (sigaddset(&s_sig_one.sa_mask, SIGUSR1) < 0)
 		exit(0);
-	s_sig_one.sa_flags = SA_SIGINFO;
+	s_sig_one.sa_flags = SA_SIGINFO | SA_NODEFER;
 	s_sig_two.sa_sigaction = print_value;
-	//if (sigemptyset(&s_sig_two.sa_mask) < 0)
+	if (sigemptyset(&s_sig_two.sa_mask) < 0)
+		exit(0);
 	if (sigaddset(&s_sig_two.sa_mask, SIGUSR2) < 0)
 		exit(0);
-	s_sig_two.sa_flags = SA_SIGINFO;
+	s_sig_two.sa_flags = SA_SIGINFO | SA_NODEFER;
 	ft_putnbr_fd(pid, 1);
 	write(1, "\n", 1);
 	run_sigaction(&s_sig_one, SIGUSR1);
@@ -116,7 +118,7 @@ int	main(void)
 	while (1)
 	{
 		pause();
-		usleep(300);
+		usleep(500);
 	}
 	return (0);
 }
