@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:09:17 by gchopin           #+#    #+#             */
-/*   Updated: 2021/10/26 20:13:19 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/10/27 14:47:44 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ void	loop_message(char **argv, int pid)
 				if (kill(pid, SIGUSR2) < 0)
 					exit(EXIT_FAILURE);
 			}
-			pause();
 			j++;
 			argv[2][i] = argv[2][i] >> 1;
+			pause();
 		}
 		i++;
 	}
@@ -72,8 +72,8 @@ void	loop_end(int pid)
 	{
 		if (kill(pid, SIGUSR2) < 0)
 			exit(EXIT_FAILURE);
-		pause();
 		i++;
+		pause();
 	}
 }
 
