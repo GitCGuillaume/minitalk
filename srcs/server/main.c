@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:08:35 by gchopin           #+#    #+#             */
-/*   Updated: 2021/10/27 14:58:33 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/10/27 17:10:38 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,15 @@ void	print_value(int val, siginfo_t *info, void *ucontext)
 	static unsigned int		i = 0;
 	static int				nb = 0;
 	static int				end = 0;
+	int						size;
 
-	(void)ucontext;
 	usleep(100);
+	(void)ucontext;
+	size = (int) sizeof(char *) - 1;
 	i = buffer_operator(val, nb, i, buffer);
 	if (val == SIGUSR1)
 		end = 1;
-	if ((i & 7) == 0)
+	if ((i & size) == 0)
 	{
 		end_print(buffer, &nb, end);
 		end = 0;

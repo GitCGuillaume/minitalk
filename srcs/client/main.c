@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:09:17 by gchopin           #+#    #+#             */
-/*   Updated: 2021/10/27 14:47:44 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/10/27 16:35:16 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	program_wait(int val)
 	if (val == SIGUSR2)
 	{
 		usleep(10);
+		write(1, "OK\n", 3);
 	}
 }
 
