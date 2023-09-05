@@ -6,7 +6,7 @@
 /*   By: gchopin <gchopin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 11:08:35 by gchopin           #+#    #+#             */
-/*   Updated: 2021/10/27 17:11:22 by gchopin          ###   ########.fr       */
+/*   Updated: 2021/11/01 10:21:18 by gchopin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	end_print(unsigned char *buffer, int *nb, int end)
 			alloc_print(buffer, total, nb);
 		}
 		write(1, g_mem_buffer, total);
-		write(1, "\n", 1);
 		free(g_mem_buffer);
 		g_mem_buffer = NULL;
 		total = 0;

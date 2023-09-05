@@ -81,7 +81,6 @@ void	loop_end(int pid)
 int	main(int argc, char **argv)
 {
 	struct sigaction	s_sig;
-	int					i;
 	int					pid;
 	int					result;
 
@@ -91,7 +90,6 @@ int	main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	if (sigaddset(&s_sig.sa_mask, SIGUSR2) < 0)
 		exit(EXIT_FAILURE);
-	i = 0;
 	check_args(argc, argv);
 	pid = ft_atoi(argv[1]);
 	if (argv[2])
