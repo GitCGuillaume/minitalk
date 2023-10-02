@@ -13,5 +13,5 @@ Projet qui introduit aux signaux unix, ce projet consiste à envoyer des chaines
 
 >Lancer la commande ./server ID_PROCESSUS_DU_SERVEUR, suivi d'un message (ex: ./client 17347 Bonjour!)
 
-![server](https://github.com/GitCGuillaume/minitalk/assets/34135668/1077a402-0116-48c7-9523-36f93c9631f2)
-![client](https://github.com/GitCGuillaume/minitalk/assets/34135668/7216170d-bdd7-41ce-bfed-70ca07f76e35)
+![server](https://github.com/GitCGuillaume/minitalk/assets/34135668/62405752-17d3-4c99-a059-8a9b7300f0b4)
+![client](https://github.com/GitCGuillaume/minitalk/assets/34135668/3b23707f-a660-4c88-8a3f-49a163897f19)
